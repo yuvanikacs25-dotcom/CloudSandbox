@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+	<title>Cloud Sandbox Editor</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
 <body>
 
 <div class="header">
-    <h1>Cloud Sandbox</h1>
-    <p>Online Python Code Editor</p>
+	<h1>Cloud Sandbox</h1>
+	<p>Online Python Code Editor</p>
 </div>
 
 <div class="container">
 
-    <div class="editor-box">
+	<div class="editor-box">
 
-        <h2>Code Editor</h2>
+		<h2>Code Editor</h2>
 
-        <textarea id="code"
-            placeholder="Write your Python code here..."></textarea>
-<br>
+		<textarea id="code"
+			placeholder="Write your Python code here..."></textarea>
 
-        <button class="run-button" onclick="runCode()">
-            ▶ Run Code
-        </button>
+		<br>
 
-        <h2>Output</h2>
+		<button class="run-button" onclick="runCode()">
+			▶ Run Code
+		</button>
 
-        <textarea id="output"
-            readonly
-            placeholder="Your output will appear here..."></textarea>
+		<h2>Output</h2>
 
-    </div>
+		<textarea id="output"
+			readonly
+			placeholder="Your output will appear here..."></textarea>
+
+	</div>
 
 </div>
 
