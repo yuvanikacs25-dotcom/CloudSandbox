@@ -1,23 +1,52 @@
-<nav>
-    <a href="index.html">Home</a> |
-    <a href="login.html">Login</a> |
-    <a href="editor.html">Editor</a>
-</nav>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Cloud Sandbox</title>
-	<link rel="stylesheet" href="../static/css/style.css">
+
+	<link rel="stylesheet"
+		  href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+
+<div class="header">
 
 	<h1>Cloud Sandbox</h1>
 
-	<p>Run code online safely.</p>
+	<p>Write. Run. Learn.</p>
 
-	<a href="editor.html">
-    <button>Start Coding</button>
-</a>
+</div>
+
+
+<div class="container">
+
+	<div class="editor-box">
+
+		<h2>Welcome to Cloud Sandbox</h2>
+
+		<p>
+			Write and run Python programs directly
+			in your browser.
+		</p>
+
+		<br>
+
+		<a href="/editor">
+			<button class="run-button">
+				Start Coding
+			</button>
+		</a>
+
+		<a href="/login">
+			<button class="run-button">
+				Login
+			</button>
+		</a>
+
+	</div>
+
+</div>
 
 </body>
 </html>

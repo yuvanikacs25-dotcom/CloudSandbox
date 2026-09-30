@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Login</title>
+    <title>Cloud Sandbox - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+<div class="header">
+    <h1>Cloud Sandbox</h1>
+    <p>Login to continue</p>
+</div>
 
-	<h1>Login</h1>
+<div class="container">
+    <div class="editor-box">
+        <h2>Login</h2>
+        <form onsubmit="loginUser(event)">
+            <input type="text" id="username" placeholder="Enter username" required>
+            <br><br>
+            <input type="password" id="password" placeholder="Enter password" required>
+            <br><br>
+            <button type="submit" class="run-button">Login</button>
+        </form>
+        <p id="message"></p>
+        <br>
+        <a href="/">Back to Home</a>
+    </div>
+</div>
 
-	<input type="text" placeholder="Username">
-	<br><br>
+<script>
+function loginUser(event) {
+    event.preventDefault();
 
-	<input type="password" placeholder="Password">
-	<br><br>
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-	<button>Login</button>
-
+    if (username !== "" && password !== "") {
+        document.getElementById("message").innerText = "Login successful!";
+        setTimeout(function() {
+            window.location.href = "/editor";
+        }, 1000);
+    }
+}
+</script>
 </body>
 </html>

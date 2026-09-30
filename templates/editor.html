@@ -1,23 +1,69 @@
+<!DOCTYPE html>
+<html>
 <body>
 
-<h1>Cloud Sandbox Editor</h1>
+<div class="header">
+    <h1>Cloud Sandbox</h1>
+    <p>Online Python Code Editor</p>
+</div>
 
-<select>
-    <option>Python</option>
-    <option>Java</option>
-    <option>C</option>
-</select>
+<div class="container">
 
-<br><br>
+    <div class="editor-box">
 
-<textarea rows="15" cols="80" placeholder="Write your code here"></textarea>
+        <h2>Code Editor</h2>
 
-<br><br>
+        <textarea id="code"
+            placeholder="Write your Python code here..."></textarea>
+<br>
 
-<button>Run Code</button>
+        <button class="run-button" onclick="runCode()">
+            ▶ Run Code
+        </button>
 
-<h3>Output</h3>
+        <h2>Output</h2>
 
-<textarea rows="5" cols="80" readonly></textarea>
+        <textarea id="output"
+            readonly
+            placeholder="Your output will appear here..."></textarea>
+
+    </div>
+
+</div>
+
+<script>
+
+function runCode() {
+
+	let code = document.getElementById("code").value;
+
+	document.getElementById("output").value = "Running...";
+
+	fetch("/run", {
+		method: "POST",
+
+		headers: {
+			"Content-Type": "application/json"
+		},
+
+		body: JSON.stringify({
+			code: code
+		})
+	})
+
+	.then(response => response.json())
+
+	.then(data => {
+		document.getElementById("output").value = data.output;
+	})
+
+	.catch(error => {
+		document.getElementById("output").value =
+			"Error: " + error;
+	});
+}
+
+</script>
 
 </body>
+</html>
