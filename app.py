@@ -12,23 +12,22 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+	if request.method == "GET":
+		return render_template("login.html")
 
-    if request.method == "GET":
-        return render_template("login.html")
+	data = request.get_json() or {}
+	username = data.get("username", "")
+	password = data.get("password", "")
 
-    data = request.get_json()
+	if username and password:
+		return jsonify({
+			"message": "Login successful!",
+			"username": username,
+		})
 
-    username = data.get("username", "")
-    password = data.get("password", "")
-
-    if username and password:
-        return jsonify({
-            "message": "Login successful!"
-        })
-
-    return jsonify({
-        "message": "Please enter username and password."
-    })
+	return jsonify({
+		"message": "Please enter username and password."
+	})
 
 
 @app.route("/editor")
@@ -42,7 +41,9 @@ def run_code():
 	code = data.get("code", "")
 
 	if not isinstance(code, str) or not code.strip():
-		return jsonify({"output": "Please enter some Python code."})
+		return jsonify({
+			"output": "Please enter some Python code."
+		})
 
 	try:
 		compiled_code = compile_restricted(
@@ -60,18 +61,26 @@ def run_code():
 		output = execution_locals.get("_print")
 		if output is None:
 			output = execution_globals.get("_print")
+
 		if output is not None:
 			output = output()
 
 		if not output:
 			output = "Code executed successfully."
 
-		return jsonify({"output": output})
+		return jsonify({
+			"output": output
+		})
 
 	except SyntaxError as e:
-		return jsonify({"output": f"Syntax Error: {e}"})
+		return jsonify({
+			"output": f"Syntax Error: {e}"
+		})
+
 	except Exception as e:
-		return jsonify({"output": f"Error: {e}"})
+		return jsonify({
+			"output": f"Error: {e}"
+		})
 
 
 if __name__ == "__main__":

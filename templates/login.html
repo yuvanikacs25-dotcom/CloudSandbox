@@ -3,63 +3,133 @@
 
 <head>
 	<title>Cloud Sandbox - Login</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<link rel="stylesheet"
+		  href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
+
 <nav class="navbar">
-	<div class="nav-title">Cloud Sandbox</div>
+
+	<div class="nav-title">
+		Cloud Sandbox
+	</div>
+
 	<div class="nav-links">
 		<a href="/">Home</a>
 		<a href="/login">Login</a>
 		<a href="/editor">Editor</a>
 	</div>
+
 </nav>
 
-<main class="editor-box">
+
+<div class="editor-box">
+
 	<h1>Cloud Sandbox</h1>
+
 	<h2>Login</h2>
 
-	<input type="text" id="username" placeholder="Enter username" autocomplete="username">
-	<br><br>
-	<input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
+	<input
+		type="text"
+		id="username"
+		placeholder="Enter username">
+
 	<br><br>
 
-	<button class="run-button" type="button" onclick="loginUser()">🔐 Login</button>
+	<input
+		type="password"
+		id="password"
+		placeholder="Enter password">
+
+	<br><br>
+
+	<button class="run-button" onclick="loginUser()">
+		🔐 Login
+	</button>
+
 	<p id="message" role="status" aria-live="polite"></p>
-</main>
+
+</div>
+
 
 <footer>
+
 	<p>© 2026 Cloud Sandbox | Online Python Code Editor</p>
+
 </footer>
 
-<script>
-async function loginUser() {
-	const username = document.getElementById("username").value;
-	const password = document.getElementById("password").value;
-	const message = document.getElementById("message");
 
-	if (!username || !password) {
-		message.innerText = "Please enter username and password.";
+<script>
+
+function loginUser() {
+
+	let username =
+		document.getElementById("username").value;
+
+	let password =
+		document.getElementById("password").value;
+
+
+	if (username === "" || password === "") {
+
+		document.getElementById("message").innerText =
+			"Please enter username and password.";
+
 		return;
 	}
 
-	try {
-		const response = await fetch("/login", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ username, password })
-		});
-		const data = await response.json();
-		message.innerText = data.message || "Unable to log in.";
 
-		if (response.ok && data.message === "Login successful!") {
+	fetch("/login", {
+
+		method: "POST",
+
+		headers: {
+			"Content-Type": "application/json"
+		},
+
+		body: JSON.stringify({
+
+			username: username,
+			password: password
+
+		})
+
+	})
+
+	.then(response => response.json())
+
+	.then(data => {
+
+		document.getElementById("message").innerText =
+			data.message;
+
+
+		if (data.message === "Login successful!") {
+
+			localStorage.setItem(
+				"username",
+				data.username
+			);
+
 			window.location.href = "/editor";
+
 		}
-	} catch (error) {
-		message.innerText = "Error connecting to server.";
-	}
+
+	})
+
+	.catch(error => {
+
+		document.getElementById("message").innerText =
+			"Error connecting to server.";
+
+	});
+
 }
+
 </script>
+
 </body>
+
 </html>

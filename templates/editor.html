@@ -37,6 +37,7 @@
 	<div class="editor-box">
 
 		<h2>Code Editor</h2>
+	<h3 id="welcomeMessage"></h3>
 
 		<label for="language">Language:</label>
 
@@ -74,7 +75,12 @@
 	</div>
 
 </div>
+let username = localStorage.getItem("username");
 
+if (username) {
+    document.getElementById("welcomeMessage").innerText =
+        "Welcome, " + username + " 👋";
+}
 <script>
 
 function runCode() {
