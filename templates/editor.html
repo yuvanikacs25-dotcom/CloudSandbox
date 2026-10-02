@@ -1,33 +1,45 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>Cloud Sandbox Editor</title>
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet"
+		  href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
 <div class="header">
+
 	<h1>Cloud Sandbox</h1>
+
 	<p>Online Python Code Editor</p>
+
 </div>
+<a href="/">
+    <button class="run-button">
+        🏠 Home
+    </button>
+</a>
 
 <div class="container">
 
 	<div class="editor-box">
 
 		<h2>Code Editor</h2>
+
 		<label for="language">Language:</label>
 
-<select id="language">
-    <option value="python">Python</option>
-</select>
+		<select id="language">
+			<option value="python">Python</option>
+		</select>
 
-<br><br>
+		<br><br>
 
-		<textarea id="code"
+		<textarea
+			id="code"
 			placeholder="Write your Python code here..."></textarea>
 
 		<br>
@@ -35,13 +47,15 @@
 		<button class="run-button" onclick="runCode()">
 			▶ Run Code
 		</button>
+
 		<button class="run-button" onclick="clearEditor()">
-    Clear
-</button>
+			Clear
+		</button>
 
 		<h2>Output</h2>
 
-		<textarea id="output"
+		<textarea
+			id="output"
 			readonly
 			placeholder="Your output will appear here..."></textarea>
 
@@ -72,21 +86,45 @@ function runCode() {
 	.then(response => response.json())
 
 	.then(data => {
-		document.getElementById("output").value = data.output;
+
+		document.getElementById("output").value =
+			data.output;
+
 	})
 
 	.catch(error => {
+
 		document.getElementById("output").value =
 			"Error: " + error;
+
 	});
+
 }
+
+
 function clearEditor() {
 
-    document.getElementById("code").value = "";
-    document.getElementById("output").value = "";
+	document.getElementById("code").value = "";
+
+	document.getElementById("output").value = "";
 
 }
+
+
+document.getElementById("code").addEventListener("keydown", function(event) {
+
+	if (event.ctrlKey && event.key === "Enter") {
+
+		event.preventDefault();
+
+		runCode();
+
+	}
+
+});
+
 </script>
 
 </body>
+
 </html>
