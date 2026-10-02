@@ -1,52 +1,36 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>Cloud Sandbox</title>
-
-	<link rel="stylesheet"
-		  href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-
-<div class="header">
-
-	<h1>Cloud Sandbox</h1>
-
-	<p>Write. Run. Learn.</p>
-
-</div>
-
-
-<div class="container">
-
-	<div class="editor-box">
-
-		<h2>Welcome to Cloud Sandbox</h2>
-
-		<p>
-			Write and run Python programs directly
-			in your browser.
-		</p>
-
-		<br>
-
-	<a href="/login">
-    <button class="run-button">
-        Start Coding
-    </button>
-</a>	
-
-		<a href="/login">
-			<button class="run-button">
-				Login
-			</button>
-		</a>
-
+	<div class="header">
+		<h1>Cloud Sandbox</h1>
+		<p>Write. Run. Learn.</p>
 	</div>
 
-</div>
+	<div class="container">
+		<div class="editor-box">
+			<h2>Welcome to Cloud Sandbox</h2>
+			<p>Write and run Python programs directly in your browser.</p>
+			<br>
+			<a href="/login"><button class="run-button">🚀 Start Coding</button></a>
+			<a href="/login"><button class="run-button">🔐 Login</button></a>
+		</div>
+
+		<div class="editor-box">
+			<h2>Features</h2>
+			<p>🐍 Run Python code in your browser</p>
+			<p>▶ Execute code and view the output</p>
+			<p>🧹 Clear your code and output</p>
+			<p>⬇ Download your Python code</p>
+			<p>⌨ Use Ctrl + Enter to run code</p>
+		</div>
+	</div>
+<footer>
+    <p>© 2026 Cloud Sandbox | Online Python Code Editor</p>
+</footer>
 
 </body>
 </html>
