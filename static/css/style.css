@@ -1,3 +1,26 @@
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background: #f4f6f8;
+	color: #222;
+}
+
+/* Home page header */
+.header {
+	text-align: center;
+	padding: 30px 20px 10px;
+}
+
+.header h1 {
+	color: #2563eb;
+	margin-bottom: 8px;
+}
+
+.header p {
+	color: #666;
+}
+
+/* Main editor box */
 .editor-box {
 	width: 80%;
 	max-width: 900px;
@@ -8,25 +31,51 @@
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Headings */
+.editor-box h1 {
+	color: #2563eb;
+}
+
+.editor-box h2 {
+	margin-top: 10px;
+}
+
+/* Code and output areas */
 .editor-box textarea {
 	width: 100%;
 	box-sizing: border-box;
-	min-height: 200px;
+	min-height: 220px;
 	padding: 15px;
 	font-family: Consolas, monospace;
 	font-size: 15px;
+	line-height: 1.5;
 	border: 1px solid #ccc;
 	border-radius: 6px;
 	resize: vertical;
+	outline: none;
 }
 
+.editor-box textarea:focus {
+	border-color: #2563eb;
+}
+
+/* Output box */
 #output {
-	min-height: 120px;
+	min-height: 130px;
 	background: #f5f5f5;
 }
 
+/* Language selector */
+#language {
+	padding: 9px 12px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+}
+
+/* Buttons */
 .run-button {
-	margin: 10px 0;
+	margin: 10px 5px 10px 0;
 	padding: 12px 25px;
 	font-size: 16px;
 	background: #2563eb;
@@ -40,8 +89,18 @@
 	background: #1d4ed8;
 }
 
-#language {
-	padding: 8px;
-	border-radius: 5px;
+/* Login inputs */
+.editor-box input {
+	width: 100%;
+	max-width: 400px;
+	box-sizing: border-box;
+	padding: 12px;
 	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 15px;
+}
+
+.editor-box input:focus {
+	outline: none;
+	border-color: #2563eb;
 }
