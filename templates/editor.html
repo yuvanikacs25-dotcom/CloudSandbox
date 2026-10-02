@@ -19,6 +19,13 @@
 	<div class="editor-box">
 
 		<h2>Code Editor</h2>
+		<label for="language">Language:</label>
+
+<select id="language">
+    <option value="python">Python</option>
+</select>
+
+<br><br>
 
 		<textarea id="code"
 			placeholder="Write your Python code here..."></textarea>
@@ -28,6 +35,9 @@
 		<button class="run-button" onclick="runCode()">
 			▶ Run Code
 		</button>
+		<button class="run-button" onclick="clearEditor()">
+    Clear
+</button>
 
 		<h2>Output</h2>
 
@@ -70,7 +80,12 @@ function runCode() {
 			"Error: " + error;
 	});
 }
+function clearEditor() {
 
+    document.getElementById("code").value = "";
+    document.getElementById("output").value = "";
+
+}
 </script>
 
 </body>

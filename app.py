@@ -10,9 +10,25 @@ def home():
 	return render_template("index.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-	return render_template("login.html")
+
+    if request.method == "GET":
+        return render_template("login.html")
+
+    data = request.get_json()
+
+    username = data.get("username", "")
+    password = data.get("password", "")
+
+    if username and password:
+        return jsonify({
+            "message": "Login successful!"
+        })
+
+    return jsonify({
+        "message": "Please enter username and password."
+    })
 
 
 @app.route("/editor")

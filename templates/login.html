@@ -2,46 +2,91 @@
 <html>
 
 <head>
-    <title>Cloud Sandbox - Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<title>Cloud Sandbox - Login</title>
+
+	<link rel="stylesheet"
+		  href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
-<div class="header">
-    <h1>Cloud Sandbox</h1>
-    <p>Login to continue</p>
-</div>
 
-<div class="container">
-    <div class="editor-box">
-        <h2>Login</h2>
-        <form onsubmit="loginUser(event)">
-            <input type="text" id="username" placeholder="Enter username" required>
-            <br><br>
-            <input type="password" id="password" placeholder="Enter password" required>
-            <br><br>
-            <button type="submit" class="run-button">Login</button>
-        </form>
-        <p id="message"></p>
-        <br>
-        <a href="/">Back to Home</a>
-    </div>
+<div class="editor-box">
+
+	<h1>Cloud Sandbox</h1>
+
+	<h2>Login</h2>
+
+	<input type="text"
+		   id="username"
+		   placeholder="Enter username">
+
+	<br><br>
+
+	<input type="password"
+		   id="password"
+		   placeholder="Enter password">
+
+	<br><br>
+
+	<button class="run-button" onclick="loginUser()">
+		Login
+	</button>
+
+	<p id="message" role="status" aria-live="polite"></p>
+
 </div>
 
 <script>
-function loginUser(event) {
-    event.preventDefault();
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+function loginUser() {
 
-    if (username !== "" && password !== "") {
-        document.getElementById("message").innerText = "Login successful!";
-        setTimeout(function() {
-            window.location.href = "/editor";
-        }, 1000);
-    }
+	let username = document.getElementById("username").value;
+	let password = document.getElementById("password").value;
+
+	if (username === "" || password === "") {
+
+		document.getElementById("message").innerText =
+			"Please enter username and password.";
+
+		return;
+	}
+
+	fetch("/login", {
+		method: "POST",
+
+		headers: {
+			"Content-Type": "application/json"
+		},
+
+		body: JSON.stringify({
+			username: username,
+			password: password
+		})
+	})
+
+	.then(response => response.json())
+
+	.then(data => {
+
+		document.getElementById("message").innerText =
+			data.message;
+
+		if (data.message === "Login successful!") {
+			window.location.href = "/editor";
+		}
+
+	})
+
+	.catch(error => {
+
+		document.getElementById("message").innerText =
+			"Error connecting to server.";
+
+	});
+
 }
+
 </script>
+
 </body>
 </html>
